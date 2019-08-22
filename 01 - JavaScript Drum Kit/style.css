@@ -1,13 +1,15 @@
 html {
     font-size: 62.5%;
 }
+
 body {
-   margin: 0;
-   padding: 0;
-   overflow: hidden;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-.keys {
+.keys,
+.buttons {
     background: url('https://i.imgur.com/b9r5sEL.jpg');
     background-position: center;
     background-repeat: no-repeat;
@@ -21,13 +23,18 @@ body {
     text-align: center;
 }
 
-.key {
+.buttons {
+    display: none;
+}
+
+.key,
+.button {
     display: flex;
     flex-direction: column;
     border: .4rem solid black;
     border-radius: .5rem;
     margin: 0.3rem;
-    font-size: 1rem;
+    font-size: 2rem;
     padding: 1.5rem .5rem;
     transition: all 0.07s ease;
     width: 10rem;
@@ -35,21 +42,51 @@ body {
     color: white;
     background: rgba(0, 0, 0, 0.4);
     text-shadow: 0 0 .5rem black;
+    z-index: 100;
 }
 
-.key kbd {
+button:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+
+kbd {
     font-size: 4rem;
     color: white;
+    z-index: -1;
 }
 
 .sound {
     color: #E1C002;
     font-size: 1.2rem;
     text-transform: uppercase;
+    z-index: -1;
 }
 
 .play {
     border-color: #E1C002;
     transform: scale(1.1);
     box-shadow: 0 0 1rem #E1C002;
+}
+
+button:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+@media (max-width:800px) {
+    .keys {
+        display: none;
+    }
+
+    .buttons {
+        display: flex;
+    }
 }
