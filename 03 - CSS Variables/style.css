@@ -1,0 +1,34 @@
+html {
+    font-size: 10px;
+}
+
+:root {
+    --base: #ffc600;
+    --space: 10px;
+    --blur: 10px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #192D3D;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+}
+
+img {
+    margin: 9rem auto;
+    max-width: 60%;
+    border-radius: 1rem;
+    padding:  var(--space);
+    background: var(--base);
+    filter: blur(var(--blur));
+}
+
+#js {
+    color: var(--base);
+}
+
+h1 {
+    font-weight: bold;
+}
