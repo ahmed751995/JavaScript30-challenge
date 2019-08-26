@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+let cities = [];
+
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(value => cities.push(...value));
+
+function findMatch(word, cities) {
+  return cities.filter(place => {
+    let input_reg = new RegExp(word, 'ig');
+    return place.city.match(input_reg) || place.state.match(input_reg);
+  });
+}
+
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+
+function displayMatch() {
+  let found = findMatch(this.value, cities);
+
+  let html = found.map(place => {
+    let regex = new RegExp(this.value, 'gi');
+    let matched_city = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    let matched_state = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    let number = numberWithCommas(place.population);
+    return `<li>
+        <span class="name">${matched_city}, ${matched_state}</span>
+        <span class="population">${number}</span>
+        </li>`
+  });
+  ul.innerHTML = html.join('');
+}
+
+let text = document.querySelector('.search-form .search');
+text.addEventListener("keyup", displayMatch);
+text.addEventListener("change", displayMatch);
+
+
+let ul = document.querySelector(".suggestions")
+</script>
+</body>
+</html>
