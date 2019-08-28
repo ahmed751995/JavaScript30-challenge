@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hold Shift to Check Multiple Checkboxes</title>
+</head>
+<body>
+  <style>
+
+    html {
+      font-family: sans-serif;
+      background: #ffc600;
+    }
+
+    .inbox {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #F1F1F1;
+    }
+
+    .item:last-child {
+      border-bottom: 0;
+    }
+
+    input:checked + p {
+      background: #F9F9F9;
+      text-decoration: line-through;
+    }
+
+    input[type="checkbox"] {
+      margin: 20px;
+    }
+
+    p {
+      margin: 0;
+      padding: 20px;
+      transition: background 0.2s;
+      flex: 1;
+      font-family:'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+      border-left: 1px solid #D1E2FF;
+    }
+  </style>
+   <!--
+   The following is a common layout you would see in an email client.
+
+   When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
+
+  -->
+  <div class="inbox">
+    <div class="item">
+      <input type="checkbox">
+      <p>This is an inbox layout. 0</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Check one item 1</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Hold down your Shift key 2</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Check a lower item 3</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Everything in between should also be set to checked 4</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Try to do it without any libraries 5</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Just regular JavaScript 6</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Good Luck! 7</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Don't forget to tweet your result! 8</p>
+    </div>
+  </div>
+
+<script>
+
+
+let checkBoxes = document.querySelectorAll('.item input[type="checkbox"]');
+let last;
+
+function checking(e) {
+  if(e.shiftKey && this.checked) {
+    let inBetween = false;
+    checkBoxes.forEach(box =>{
+      if(box == last || box == this) {
+        inBetween = !inBetween;
+      }
+      if(inBetween) {
+        box.checked = true;
+      }
+    });
+  }
+  last = this;
+}
+
+
+
+checkBoxes.forEach(checkBox => checkBox.addEventListener("click",checking));
+
+
+
+
+
+// this is my attempt without watching the tutorial :D
+
+  // let shift = false;
+  // let last = 0;
+  // let shift_down = window.addEventListener("keydown", check_shift_down);
+  // let shift_up = window.addEventListener("keyup", check_shift_up);
+  // let items_q = document.querySelectorAll('.item');
+  // let items = Array(...items_q);
+
+
+  // items_q.forEach(item => item.addEventListener('change', select));
+
+  // function check_shift_down(e) {
+  //   if(e.key === "Shift") shift = true;
+  // }
+
+  // function check_shift_up(e) {
+  //   if(e.key === "Shift") shift = false;
+  // }
+
+  // function select(e) {
+  //   let temp = e.target.parentElement;
+  //   if(!shift) {
+  //     last = temp;
+  //     return;
+  //   }
+  //   else {
+  //     if(last == 0){
+  //       items.splice(items.indexOf(temp), items.length-1)
+  //       .forEach(item => item.querySelector("input").checked = true);
+  //     }
+  //     else {
+  //       let tempIndex = items.indexOf(temp);
+  //       let lastIndex = items.indexOf(last)
+  //       if(tempIndex < lastIndex) {
+  //         items.slice(tempIndex, lastIndex+1)
+  //         .forEach(item => item.querySelector("input").checked = true);
+  //       }
+  //       else {
+  //         items.slice(lastIndex, tempIndex+1)
+  //         .forEach(item => {
+  //           item.children[0].checked = true;
+  //           });
+  //       }
+  //       last = temp;
+  //       return;
+  //     }
+  //   }
+  // }
+
+
+
+</script>
+</body>
+</html>

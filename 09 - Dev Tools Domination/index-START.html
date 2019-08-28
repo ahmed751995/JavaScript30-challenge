@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hi man');
+
+    // Interpolated
+    console.log('hi man %s ?', '\u{1F600}'); 
+    
+    // Styled
+    console.log('%c good morning','font-size: 20px; background:lightblue;')
+    
+    // warning!
+    console.warn('be careful');
+
+    // Error :|
+    console.error('O.o \u{1F33D}');
+
+    // Info
+    console.info('you are too late',new Date())
+
+    // Testing
+    console.assert(1===2, 'this is wrong');
+
+    // clearing
+    console.clear();
+
+    // Viewing DOM Elements
+    let p = document.querySelector('p');
+    console.dir(p);
+    console.clear();
+
+    // Grouping together
+    console.groupCollapsed('hi');
+    console.log('no now');
+    console.log('go away');
+    console.groupEnd('hi');
+    // counting
+    console.count('hi');
+    console.count('go');
+    console.count('hi');
+    console.count('go');
+    console.count('hi');
+    console.count('hi');
+    console.count('hi');
+    console.count('go');
+    console.count('hi');
+    console.count('hi');
+    console.clear();
+
+
+    // timing
+    console.time('looping');
+    let x  = 0;
+    for(let i = 1; i < 1000000000; i++) {
+      x++;
+    }
+    console.timeEnd('looping');
+  </script>
+</body>
+</html>
