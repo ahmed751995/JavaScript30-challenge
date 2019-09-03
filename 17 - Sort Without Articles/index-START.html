@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sort Without Articles</title>
+</head>
+<body>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #bands {
+      list-style: inside square;
+      font-size: 20px;
+      background: white;
+      width: 500px;
+      margin: auto;
+      padding: 0;
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    #bands li {
+      border-bottom: 1px solid #efefef;
+      padding: 20px;
+    }
+    
+    #bands li:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      color: #ffc600;
+      text-decoration: none;
+    }
+
+  </style>
+
+  <ul id="bands"></ul>
+
+<script>
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+const l = ['a', 'an','the'];
+
+function strip(sentence) {
+  return sentence.trim().replace(/^(a |an |the )/i, '');
+}
+
+bands.sort((a,b) => strip(a) > strip(b)? 1 : -1);
+
+// bands.sort((a, b) => {
+//   let a1 = a.toLowerCase().split(' ');
+//   let b1 = b.toLowerCase().split(' ');
+//   let a2 = a.toLowerCase();
+//   let b2  = b.toLowerCase();
+
+//   if(l.includes(a1[0])){
+//     a2 = a1.slice(1, a1.length).join(' ');
+//   }
+//   if(l.includes(b1[0])) {
+//     b2 = b1.slice(1, b1.length).join(' ');
+//   }
+//   if(a2 < b2) return -1;
+//   else return 1;
+  
+// });
+// console.log(bands);
+document.querySelector('#bands')
+        .innerHTML = bands.map( band => `<li>${band}</li>`).join('');
+</script>
+
+</body>
+</html>
