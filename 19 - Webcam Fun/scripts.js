@@ -81,8 +81,6 @@ function alphaEffect(pixels) {
     return pixels;
 }
 
-alphaEffect({data:[1,2,3,4]});
-
 video.addEventListener('canplay', drawToCanvas);
 
 document.querySelectorAll('input[type="radio"]')
