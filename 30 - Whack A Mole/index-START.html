@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Whack A Mole!</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>Whack-a-mole! <span class="score">0</span></h1>
+
+  <div class="button">
+    <button onClick="startGame()">Start!</button>
+  </div>
+
+  <div class="game">
+    <div class="hole hole1">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole2">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole3">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole4">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole5">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole6">
+      <div class="mole"></div>
+    </div>
+  </div>
+
+  <script>
+    const holes = document.querySelectorAll('.hole');
+    const scoreBoard = document.querySelector('.score');
+    const moles = document.querySelectorAll('.mole');
+    let prevHole;
+    let score;
+    let timeup = false;
+
+    function randTime(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function randHole(holes) {
+      let index = Math.floor(Math.random() * holes.length);
+      let hole = holes[index];
+
+      if (hole === prevHole) return randHole(holes);
+
+      prevHole = hole;
+      return holes[index];
+    }
+
+    function popup() {
+      let time = randTime(200, 1000);
+      let hole = randHole(holes);
+      hole.classList.add('up');
+      setTimeout(() => {
+        hole.classList.remove('up');
+        if (!timeup) popup();
+      }, time);
+
+    }
+
+    function startGame() {
+      scoreBoard.textContent = 0;
+      timeup = false;
+      score = 0;
+      popup();
+      setTimeout(() => timeup = true, 10000)
+    }
+
+    function scoreCalc(e) {
+      if (!e.isTrusted) return;
+      score++;
+      this.parentNode.classList.remove('up');
+      scoreBoard.textContent = score;
+    }
+
+    moles.forEach(mole => mole.addEventListener('click', scoreCalc));
+  </script>
+</body>
+
+</html>
